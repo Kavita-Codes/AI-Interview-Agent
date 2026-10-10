@@ -20,7 +20,6 @@ const Auth = () => {
                     withCredentials:true
                 }
             )
-
             console.log(result)
         } catch (error) {
            console.log(error) 

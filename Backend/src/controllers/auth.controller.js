@@ -21,14 +21,13 @@ export const googleAuth = async (req, res) => {
       });
     }
 
-    const token = generateToken(user._id);
+    const token = await generateToken(user._id);
 
     res.cookie("token", token, {
       httpOnly: true,
       secure: false, 
       sameSite: "strict",
       maxAge: 7 * 24 * 60 * 60 * 1000,
-      path: "/",
     });
 
     return res.status(200).json({
@@ -40,31 +39,18 @@ export const googleAuth = async (req, res) => {
       },
     });
   } catch (error) {
-    console.error("Google authentication error:", error);
-
-    return res.status(500).json({
-      message: "Internal server error",
-    });
+    console.log("Google authentication error:", error);
   }
 };
 
 export const logout = (req, res) => {
   try {
-    res.clearCookie("token", {
-      httpOnly: true,
-      secure: false, 
-      sameSite: "strict",
-      path: "/",
-    });
+    res.clearCookie("token");
 
     return res.status(200).json({
       message: "Successfully logged out",
     });
   } catch (error) {
     console.error("Logout error:", error);
-
-    return res.status(500).json({
-      message: "Logout failed",
-    });
   }
 };
