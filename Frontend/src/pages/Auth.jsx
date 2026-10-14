@@ -1,9 +1,13 @@
 import { signInWithPopup } from "firebase/auth"
 import { auth, provider } from "../utils/firebase.js"
 import axios from "axios"
+import { useDispatch } from "react-redux"
+import { setUserData } from "../redux/userSlice.js"
 
 
 const Auth = () => {
+
+    const dispatch = useDispatch()
 
     const handleGoogleLogin = async()=>{
         try {
@@ -20,9 +24,12 @@ const Auth = () => {
                     withCredentials:true
                 }
             )
-            console.log(result)
+
+            dispatch(setUserData(result.data))
+            
         } catch (error) {
            console.log(error) 
+           dispatch(setUserData(null))
         }
     }
 

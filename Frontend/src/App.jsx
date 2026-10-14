@@ -20,13 +20,14 @@ const App = () => {
          dispatch(setUserData(result.data))
 
       } catch (error) {
-       console.log(error.message)
+        console.log(error)
+       dispatch(setUserData(null))
       }
     }
 
     getUser()
 
-  },[])
+  },[dispatch])
 
   return (
      <Routes>
