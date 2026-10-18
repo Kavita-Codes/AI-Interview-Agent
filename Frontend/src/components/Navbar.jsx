@@ -13,10 +13,8 @@ const Navbar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // Redux state
   const userData = useSelector((state) => state.user?.userData);
 
-  // Dynamic Name & Initial calculation (React Redux state change hote hi isko immediately re-calculate karega)
   const userName = userData?.name || 'UN';
   const userInitial = userData?.name ? userData.name.trim().slice(0, 1).toUpperCase() : 'U';
 
@@ -54,8 +52,7 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="w-full bg-[#E8F5E9] shadow-md px-4 py-3 flex items-center justify-between relative">
-        {/* Brand / Logo */}
+      <nav className="w-full bg-[#E8F5E9] shadow-md px-6 py-4 flex items-center justify-between relative">
         <div className="flex items-center space-x-2 cursor-pointer" onClick={() => navigate("/")}>
           <div className="bg-[#4CAF50] text-white font-bold px-2.5 py-1.5 rounded text-sm">
             AI
@@ -64,7 +61,6 @@ const Navbar = () => {
         </div>
 
         <div className="flex items-center space-x-4 relative">
-          {/* Credit Section */}
           <div className="relative">
             <button 
               onClick={handleCreditClick}
@@ -91,7 +87,6 @@ const Navbar = () => {
             )}
           </div>
 
-          {/* Profile Circle Section */}
           <div className="relative">
             <button 
               onClick={handleProfileClick}
@@ -126,7 +121,6 @@ const Navbar = () => {
         </div>
       </nav>
 
-      {/* Auth Modal */}
       <Auth isOpen={showAuthModal} onClose={() => setShowAuthModal(false)} />
     </>
   );
